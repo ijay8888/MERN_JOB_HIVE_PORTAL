@@ -20,12 +20,18 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["seeker", "recruiter"]  ,
+    enum: ["seeker", "recruiter", "admin"] ,
     required:true,
     
   },
-  profilePhoto: { type: String, default: "" },
-resume: { type: String, default: "" },
+  profilePhoto: { 
+    type: String, 
+    default: "" 
+  },
+  resume: { 
+    type: String, 
+    default: "" 
+  },
 
 }, { timestamps: true });
 

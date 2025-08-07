@@ -542,7 +542,7 @@ export default function Home() {
                 location: "San Francisco, CA",
                 salary: "$120k - $150k",
                 type: "Full Time",
-                logo: "/logos/airbnb.png",
+                logo: "https://cdn.prod.website-files.com/5fbb9b89508062592a9731b1/6448c1ce35d6ffe59e4d6f46_GettyImages-1399565382.jpg",
                 // featured: true,
               },
               {
@@ -551,7 +551,7 @@ export default function Home() {
                 location: "Remote",
                 salary: "$90k - $130k",
                 type: "Full Time",
-                logo: "/logos/spotify.png",
+                logo: "https://media.licdn.com/dms/image/v2/D4D12AQH3Nv9cPQPFyA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1721186213661?e=2147483647&v=beta&t=E_aTYPlw_NUGJ6Z0_3sAYn71SypG7u20bgyzotYgnfk",
               },
               {
                 title: "Data Scientist",
@@ -559,7 +559,7 @@ export default function Home() {
                 location: "New York, NY",
                 salary: "$110k - $140k",
                 type: "Full Time",
-                logo: "/logos/uber.png",
+                logo: "https://staff-force.com/wp-content/uploads/2022/04/staff-force-blog-featured-image-4.jpg",
               },
             ].map((job, index) => (
               <Grid item xs={12} key={index}>

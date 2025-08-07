@@ -18,7 +18,7 @@ export const createJob = async (req, res) => {
 
     res.status(201).json({ success: true, job: newJob });
   } catch (error) {
-    console.error("🔥 CREATE JOB ERROR:", error.message);
+    console.error("CREATE JOB ERROR:", error.message);
     res.status(500).json({ success: false, message: error.message });
   }
 };
@@ -45,7 +45,7 @@ export const getAllJobs = async (req, res) => {
 
     res.json({ success: true, jobs });
   } catch (err) {
-    console.error("🔥 FETCH JOBS ERROR:", err.message);
+    console.error("FETCH JOBS ERROR:", err.message);
     res.status(500).json({ success: false, message: "Failed to fetch jobs" });
   }
 };
@@ -61,7 +61,7 @@ export const getJobById = async (req, res) => {
     }
     res.json({ success: true, job });
   } catch (error) {
-    console.error("🔥 GET JOB BY ID ERROR:", error.message);
+    console.error(" GET JOB BY ID ERROR:", error.message);
     res.status(500).json({ success: false, message: "Failed to fetch job" });
   }
 };
@@ -74,7 +74,6 @@ export const updateJob = async (req, res) => {
       return res.status(404).json({ success: false, message: "Job not found" });
     }
 
-    // Only recruiter who posted can update
     if (job.postedBy.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         success: false,
@@ -88,7 +87,7 @@ export const updateJob = async (req, res) => {
 
     res.json({ success: true, message: "Job updated", job: updatedJob });
   } catch (error) {
-    console.error("🔥 UPDATE JOB ERROR:", error.message);
+    console.error("UPDATE JOB ERROR:", error.message);
     res.status(500).json({ success: false, message: "Failed to update job" });
   }
 };
@@ -112,7 +111,7 @@ export const deleteJob = async (req, res) => {
 
     res.json({ success: true, message: "Job deleted" });
   } catch (error) {
-    console.error("🔥 DELETE JOB ERROR:", error.message);
+    console.error("DELETE JOB ERROR:", error.message);
     res.status(500).json({ success: false, message: "Failed to delete job" });
   }
 };
@@ -193,7 +192,7 @@ export const getApplicants = async (req, res) => {
       applicants,
     });
   } catch (err) {
-    console.error("🔥 FETCH APPLICANTS ERROR:", err.message);
+    console.error("FETCH APPLICANTS ERROR:", err.message);
     res.status(500).json({ success: false, message: "Failed to fetch applicants" });
   }
 };

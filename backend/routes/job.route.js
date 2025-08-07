@@ -19,25 +19,19 @@ const router = express.Router();
 
 
 router.get("/public/search", searchPublicJobs);
-// Public: fetch all jobs
+
 router.get("/", getAllJobs);
 
-// Recruiter create job
 router.post("/", authMiddleware, recruiterOnly, createJob);
 
-// Seeker applies job
 router.post("/:jobId/apply", authMiddleware, seekerOnly, applyJob);
 
-// Seeker fetch their applied jobs
 router.get("/applied/me", authMiddleware, seekerOnly, getAppliedJobs);
 
-// Recruiter view applicants
 router.get("/:jobId/applicants", authMiddleware, recruiterOnly, getApplicants);
 
-// Single job
 router.get("/:jobId", getJobById);
 
-// Update/Delete
 router.put("/:jobId", authMiddleware, recruiterOnly, updateJob);
 router.delete("/:jobId", authMiddleware, recruiterOnly, deleteJob);
 

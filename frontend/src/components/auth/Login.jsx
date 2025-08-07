@@ -40,7 +40,16 @@ export default function Login() {
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(setUser(user));
         setSnackbar({ open: true, message: "Login successful!", severity: "success" });
-        setTimeout(() => navigate("/dashboard"), 800);
+        setTimeout(() => {
+          if (user.role === "admin") {
+            navigate("/admin/dashboard");
+          } else if (user.role === "recruiter") {
+            navigate("/dashboard");
+          } else {
+            navigate("/dashboard");
+          }
+        }, 500);
+
       } else {
         setSnackbar({ open: true, message: res.data.message || "Login failed", severity: "error" });
       }
@@ -123,6 +132,7 @@ export default function Login() {
             <MenuItem value="">Select Role</MenuItem>
             <MenuItem value="seeker">Job Seeker</MenuItem>
             <MenuItem value="recruiter">Recruiter</MenuItem>
+            <MenuItem value="admin">Admin</MenuItem>
           </TextField>
 
           {/* Login Button */}

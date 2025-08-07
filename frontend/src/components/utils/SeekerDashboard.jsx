@@ -35,8 +35,19 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function SeekerDashboard() {
+  
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+
+  const getResumeUrl = (resume) => {
+    if (!resume) return "";
+    if (resume.startsWith("http://") || resume.startsWith("https://")) return resume;
+    return `http://localhost:3000${resume.startsWith("/") ? "" : "/"}${resume}`;
+  };
+
+  const resumeUrl = getResumeUrl(user?.resume);
+
+
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -168,7 +179,7 @@ export default function SeekerDashboard() {
           sx={{
             p: 3,
             mb: 4,
-            borderRadius: 2,
+            borderRadius: 1,
             background: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)",
           }}
         >
@@ -232,7 +243,7 @@ export default function SeekerDashboard() {
         <Grid container spacing={4}>
           {/* Left Column - Profile Info */}
           <Grid item xs={12} md={6}>
-            <Paper elevation={0} sx={{ p: 3, borderRadius: 2, height: "100%" }}>
+            <Paper elevation={0} sx={{ p: 3, borderRadius: 1, height: "100%" }}>
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -300,7 +311,7 @@ export default function SeekerDashboard() {
 
           {/* Right Column - File Uploads */}
           <Grid item xs={12} md={6}>
-            <Paper elevation={0} sx={{ p: 3, borderRadius: 2 }}>
+            <Paper elevation={0} sx={{ p: 3, borderRadius: 1 }}>
               <Typography variant="h6" fontWeight={600} mb={3}>
                 Documents
               </Typography>
@@ -354,13 +365,12 @@ export default function SeekerDashboard() {
                     variant="outlined"
                     startIcon={<InsertDriveFile />}
                     size="small"
-                    href={`https://docs.google.com/gview?url=${encodeURIComponent(
-                      user.resume
-                    )}&embedded=true`}
-                    target="_blank"
+                    href={`https://docs.google.com/gview?url=${encodeURIComponent(resumeUrl)}&embedded=true`}
+      target="_blank"
                     fullWidth
                     sx={{ mb: 2 }}
                   >
+
                     View Current Resume
                   </Button>
                 ) : (
@@ -418,7 +428,7 @@ export default function SeekerDashboard() {
           ) : applications.length === 0 ? (
             <Paper
               elevation={0}
-              sx={{ p: 4, textAlign: "center", borderRadius: 2 }}
+              sx={{ p: 4, textAlign: "center", borderRadius: 1 }}
             >
               <Typography color="text.secondary" mb={2}>
                 You haven't applied to any jobs yet
@@ -435,7 +445,7 @@ export default function SeekerDashboard() {
             <Slider {...sliderSettings}>
               {applications.map((app) => (
                 <Box key={app._id} px={1}>
-                  <Card elevation={0} sx={{ borderRadius: 2 }}>
+                  <Card elevation={0} sx={{ borderRadius: 1 }}>
                     <CardContent>
                       <Typography variant="subtitle1" fontWeight={600}>
                         {app.job?.title || "Unknown Position"}

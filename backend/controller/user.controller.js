@@ -28,17 +28,17 @@ export const registerUser = async (req, res) => {
         .json({ success: false, message: "Invalid email format" });
     }
 
-    if (password.length < 6) {
+    if (password.length < 8) {
       return res.status(400).json({
         success: false,
-        message: "Password must be at least 6 characters long",
+        message: "Password must be at least 8 characters long",
       });
     }
 
-    if (!/^\d{10,15}$/.test(phoneNumber)) {
+    if (!/^\d{10,12}$/.test(phoneNumber)) {
       return res.status(400).json({
         success: false,
-        message: "Phone number must contain only digits (10–15 chars)",
+        message: "Phone number must contain 10 digits",
       });
     }
 
@@ -118,7 +118,7 @@ export const loginUser = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET || "secret",
-      { expiresIn: "1d" }
+      { expiresIn: "3d" }
     );
 
     const userWithoutPassword = {
@@ -169,7 +169,6 @@ export const getDashboard = async (req, res) => {
     let extraData = {};
 
     if (user.role === "seeker") {
-      // Fetch applied jobs
       const applications = await JobApplication.find({ applicant: req.user._id })
         .populate("job", "title company location salary");
 

@@ -37,7 +37,7 @@ useEffect(() => {
 
   const applyJob = async () => {
     if (!token) {
-      alert("⚠️ Please login to apply!");
+      alert("Please login to apply!");
       return;
     }
     try {

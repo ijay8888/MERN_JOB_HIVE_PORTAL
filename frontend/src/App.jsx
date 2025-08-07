@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import JobList from "./components/utils/JobList";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
 import CustomNavbar from "./components/shared/navbar";
@@ -14,8 +14,12 @@ import JobDetails from "./components/utils/JobDetails";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
-
+import AdminDashboard from "./admin/pages/AdminDashboard";
+import { AdminProtectedRoute } from "./admin/routes/AdminProtectedRoutes";
+import AdminNavbar from "./admin/components/AdminNavbar";
+import ManageUsers from "./admin/pages/ManageUsers";
+import ManageJobs from "./admin/pages/ManageJobs";
+import Applications from "./admin/pages/Applications";
 
 const safeParseJSON = (value) => {
   try {
@@ -28,7 +32,11 @@ const safeParseJSON = (value) => {
 };
 
 export default function App() {
+  const location = useLocation();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+
+  const showAdminNavbar = user?.role === "admin" && location.pathname.startsWith("/admin");
 
   useEffect(() => {
     const savedUser = safeParseJSON(localStorage.getItem("user"));
@@ -38,8 +46,9 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <BrowserRouter>
-      <CustomNavbar />
+    <>
+      {showAdminNavbar ? <AdminNavbar /> : <CustomNavbar />}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
@@ -54,7 +63,39 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboard />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <AdminProtectedRoute>
+              <ManageUsers />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/jobs"
+          element={
+            <AdminProtectedRoute>
+              <ManageJobs />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/applications"
+          element={
+            <AdminProtectedRoute>
+              <Applications />
+            </AdminProtectedRoute>
+          }
+        />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }

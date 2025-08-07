@@ -4,24 +4,24 @@ let theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#2563EB", // Soft professional blue
+      main: "#2563EB", 
       light: "#3B82F6",
       dark: "#1E40AF",
       contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#0D9488", // Teal accent
+      main: "#0D9488", 
       light: "#14B8A6",
       dark: "#0F766E",
       contrastText: "#FFFFFF",
     },
     background: {
-      default: "#F9FAFB", // soft light background
-      paper: "#FFFFFF", // cards, sections
+      default: "#F9FAFB", 
+      paper: "#FFFFFF", 
     },
     text: {
-      primary: "#111827", // near-black for high readability
-      secondary: "#6B7280", // soft gray for less important text
+      primary: "#111827", 
+      secondary: "#6B7280", 
     },
     divider: "#E5E7EB",
   },
@@ -37,7 +37,7 @@ let theme = createTheme({
   },
 
   shape: {
-    borderRadius: 12, // rounded corners everywhere
+    borderRadius: 12, 
   },
 
   components: {

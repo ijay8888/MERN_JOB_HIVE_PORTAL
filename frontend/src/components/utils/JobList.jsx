@@ -33,7 +33,6 @@ import {
   Category as CategoryIcon,
 } from "@mui/icons-material";
 
-
 const jobTypeColors = {
   "Full-Time": "primary",
   "Part-Time": "secondary",

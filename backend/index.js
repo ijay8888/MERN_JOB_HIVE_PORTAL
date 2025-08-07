@@ -7,11 +7,12 @@ import path from 'path'
 import userRoutes from './routes/user.route.js';
 import jobRoutes from './routes/job.route.js';
 
+import adminRoutes from "./routes/admin.route.js";
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 
 connectDB();
 
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
   res.json({ success: true, message: 'Backend is running!' });
 });
 
+app.use("/api/admin", adminRoutes);
 
 app.use('/api/user', userRoutes);
 app.use('/api/jobs', jobRoutes);
